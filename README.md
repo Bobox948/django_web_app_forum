@@ -1,5 +1,7 @@
 # django_web_app_forum
 
+Youtube video of the project : https://www.youtube.com/watch?v=FUx-Keb71YE&ab_channel=Bobox948
+
 My project is a "Calisthenics Forum" where the users can register and then make new threads asking questions to other users. Along with the question, the user can also provide an image attachment to be more precise. Other users can reply to this thread to give some answers.
 
 Distinctiveness and Complexity: Why you believe your project satisfies the distinctiveness and complexity requirements, mentioned above.
