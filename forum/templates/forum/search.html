@@ -1,0 +1,16 @@
+{% extends "forum/layout.html" %}
+{% load static %}
+{% block title %}
+    {{ name }}
+{% endblock %}
+
+{% block body %}
+<ul>
+
+{% for item in newlist %}
+<li><a href="../{{ item }}">{{ item }}</a></li>
+{% endfor %}
+</ul>
+  
+
+{% endblock %}

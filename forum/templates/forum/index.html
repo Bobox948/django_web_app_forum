@@ -1,0 +1,87 @@
+{% extends "forum/layout.html" %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+<div class="row2">
+
+    <div style="color: white" class="column2">
+        <p>Title</p>
+
+    </div>
+
+    <div style="color: white"  class="column2">
+        <p>Author</p>
+
+    </div>
+    <div style="color: white"  class="column2">
+        <p>Latest post</p>
+
+    </div>
+    <div style="color: white"  class="column2">
+        <p>Replies</p>
+
+    </div>
+
+
+</div>
+
+{% for thread in page_obj %}
+
+
+<div class="row">
+    {% if thread.closed == True %}
+    <a class="forum" href="{{ thread.title }}"><div class="column">
+
+<p style="font-size: 18px"><strong>[CLOSED] </strong></p><p style="font-size: 16px"><strong> {{ thread.title }}</strong></p>
+    </div></a>
+    
+
+    {% else %}
+    <a class="forum" href="{{ thread.title }}"><div class="column">
+
+        <p style="font-size: 16px"><strong>{{ thread.title }}</strong></p>
+            </div></a>
+
+    {% endif %}
+
+    <div class="forum" class="column">
+
+<p style="font-size: 14px"><i>by {{ thread.madeby }} {{ thread.thread_created }}</i> </p>
+    </div>
+    <div class="forum" class="column">
+
+ <p style="font-size: 14px"><i>{{ thread.post_set.all.last.post_created|timesince  }} ago by {{ thread.post_set.all.last.madeby }}</i></p>
+    </div>
+    <div class="column1">
+<p style="font-size: 14px">{{ thread.post_set.all.count|add:"-1" }}</p>
+    </div>
+
+
+</div>
+
+{% endfor %}
+
+<div id="container"></div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{% endblock %}

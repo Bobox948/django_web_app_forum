@@ -1,0 +1,90 @@
+{% extends "forum/layout.html" %}
+{% load static %}
+{% block title %}
+{% endblock %}
+
+{% block body %}
+
+{% if user == thread.madeby  %} <!-- here, if the user is the one who made the thread, he can see the close button -->
+{% if thread.closed == False %}
+
+<button id="close">Close this thread</button>
+
+{% endif %}
+
+{% endif %}
+
+<div class="c1">
+    <div class="c2">
+
+<img src="{{ madeby.image.url }}" width="150" height="150">
+<a style="color: white" href="forum/{{ thread.madeby }}">{{ thread.madeby }} (view profile)</a>
+    </div>
+    <div class="c4">
+
+{% if thread.closed == True %} <!-- if the thread is closed, [CLOSED] will appear before the title -->
+<strong><div id="title" value="{{ thread.title }}">[CLOSED] {{ thread.title }}</div></strong><br>
+{% else %}
+<strong><div id="title" value="{{ thread.title }}">{{ thread.title }}</div></strong><br>
+{% endif %}
+
+<div id="content" value="{{ thread.content}}">{{ thread.content }}</div>
+</div>
+
+</div>
+
+<div class="c3">
+
+{% if thread.photo %} <!-- if there is an attachment, it will appear -->
+<p>Attachment : </p><a href="{{ thread.photo }}" target="_blank"><img src="static/images/attachment.png" width="50px" height="50px"></a>
+{% endif %}
+
+</div>
+
+    {% if user.is_authenticated %}
+    {% if thread.closed == False %} <!-- if user is authenticated and if the status of the thread is not closed, you can reply to it-->
+    
+    <button class="r1" id="reply">Reply to this thread</button>
+    </div>
+    {% endif %}
+    
+    {% endif %}
+    <div class="post">
+        <ul></ul>
+    </div>
+    
+
+
+{% for post in page_obj %} <!-- paginator -->
+
+{% if not forloop.first %}
+
+<div class="post1"><img src="{{ post.who.image.url }}" width="75" height="75"> <!-- displays repliers avatars -->
+    {{ post.content }}
+<p><br>by <a style="color: white" href="forum/{{ post.madeby }}">{{ post.madeby }}</a> {{ post.post_created }}</p></div> 
+
+{% endif %}
+
+{% endfor %}
+</div>
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
+      

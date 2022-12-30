@@ -1,0 +1,18 @@
+{% extends "forum/layout.html" %}
+{% load static %}
+{% block title %}
+    Settings
+{% endblock %}
+
+{% block body %}
+
+<form class="form" action="{% url 'account' %}" method="post" enctype="multipart/form-data"> <!-- This allows to upload images in the form -->
+    {% csrf_token %}
+    {{ form.as_p }} <!-- as_p means block display of the form -->
+    <input type="submit" value="Save">
+</form>
+
+
+
+
+{% endblock %}

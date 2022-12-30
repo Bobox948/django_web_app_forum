@@ -1,0 +1,57 @@
+{% extends "forum/layout.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+<div class="bground">
+<p><strong>Username :</strong> {{ informations.who }}</p>
+
+{% if total < 10 %}
+
+<img src="../static/images/star.png" width="25" height="25">
+{% elif total > 10 and total < 25 %}
+
+<img src="../static/images/star.png" width="25" height="25"><img src="../static/images/star.png" width="25" height="25">
+
+{% elif total > 25 and total < 50 %}
+
+<img src="../static/images/star.png" width="25" height="25"><img src="../static/images/star.png" width="25" height="25">
+<img src="../static/images/star.png" width="25" height="25">
+
+{% elif total > 50 and total < 100 %}
+
+<img src="../static/images/star.png" width="25" height="25"><img src="../static/images/star.png" width="25" height="25">
+<img src="../static/images/star.png" width="25" height="25">
+<img src="../static/images/star.png" width="25" height="25">
+
+{% else %}
+
+<img src="../static/images/star.png" width="25" height="25"><img src="../static/images/star.png" width="25" height="25">
+<img src="../static/images/star.png" width="25" height="25">
+<img src="../static/images/star.png" width="25" height="25">
+<img src="../static/images/star.png" width="25" height="25">
+
+{% endif %}
+</div>
+<div class="bground">
+
+
+<img src="{{ informations.image.url }}" width="200" height="200"><br>
+
+<p><strong>Date of birth :</strong> {{ informations.birth }}</p>
+<p><strong>From :</strong> {{ informations.origin }}</p>
+<p><strong>Gender :</strong> {{ informations.gender }}</p>
+<p><strong>About :</strong> {{ informations.bio }}</p>
+<p><strong>Joined :</strong> {{ informations.joined|date:"M d, Y" }}</p>
+<p><strong>Last login :</strong> {{ last }}</p>
+<p>{{ threads }} threads created</p>
+<p>{{ posts }} posts made</p>
+
+
+</div>
+
+
+
+
+{% endblock %}
